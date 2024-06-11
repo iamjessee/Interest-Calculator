@@ -33,6 +33,7 @@ namespace Interest_Calculator
             ShowAllLoanInformation(formattedLoanTotal, formattedInterestTotal);
 
         }
+
         // method to handle all user input
         static decimal GetUserInput(string message, bool isPercentage = false, bool isDollar = false)
         {
