@@ -14,7 +14,6 @@ namespace Interest_Calculator
             int compound;
             decimal loanTotal;
             decimal interestTotal;
-            string input;
 
             // calling of methods to execute code
             GetLoanAmount(out principal);
@@ -30,7 +29,7 @@ namespace Interest_Calculator
             string formattedLoanTotal = loanTotal.ToString("0,000.00");
             string formattedInterestTotal = interestTotal.ToString("0,000.00");
 
-            // calling last method to display formated totals to the user
+            // calling last method to display formatted methods to the user
             ShowAllLoanInformation(formattedLoanTotal, formattedInterestTotal);
 
         }
