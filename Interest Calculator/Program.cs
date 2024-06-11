@@ -7,14 +7,14 @@ namespace Interest_Calculator
         static void Main(string[] args)
         {
             // storing of variables
-            double principal = 0.00;
-            double rate = 0.00;
-            int timeInMonths = 0;
-            double timeInYears = 0;
-            int compound = 0;
-            double loanTotal = 0.00;
-            double interestTotal = 0.00;
-            string input = "";
+            decimal principal;
+            decimal rate;
+            int timeInMonths;
+            double timeInYears;
+            int compound;
+            decimal loanTotal;
+            decimal interestTotal;
+            string input;
 
             // calling of methods to execute code
             GetLoanAmount(out principal);
@@ -30,14 +30,14 @@ namespace Interest_Calculator
             string formattedLoanTotal = loanTotal.ToString("0,000.00");
             string formattedInterestTotal = interestTotal.ToString("0,000.00");
 
-            // calling last method to display formated methods to the user
+            // calling last method to display formated totals to the user
             ShowAllLoanInformation(formattedLoanTotal, formattedInterestTotal);
 
         }
         // method to handle all user input
-        static double GetUserInput(string message, bool isPercentage = false, bool isDollar = false)
+        static decimal GetUserInput(string message, bool isPercentage = false, bool isDollar = false)
         {
-            double input;
+            decimal input;
             while (true)
             {
                 Console.Write(message);
@@ -50,7 +50,7 @@ namespace Interest_Calculator
                 {
                     userInput = userInput.TrimEnd('%');
                 }
-                if (!double.TryParse(userInput, out input))
+                if (!decimal.TryParse(userInput, out input))
                 {
                     Console.WriteLine("Please enter a number...");
                 }
@@ -62,14 +62,14 @@ namespace Interest_Calculator
         }
 
         //greets user and gets initial loan amount
-        static void GetLoanAmount(out double principal)
+        static void GetLoanAmount(out decimal principal)
         {
             Console.WriteLine("COMPOUND INTEREST CALCULATOR");
             principal = GetUserInput("Please enter your total loan amount to begin: ", false, true);
         }
 
         //gets interest rate for users loan
-        static void GetInterestRate(out double rate)
+        static void GetInterestRate(out decimal rate)
         {
             rate = GetUserInput("Please enter your loans interest rate: ", true, false);
             rate = rate / 100;
@@ -81,6 +81,7 @@ namespace Interest_Calculator
             timeInMonths = Convert.ToInt32(GetUserInput("Please enter the length for your loan in months: "));
             timeInYears = timeInMonths / 12;
         }
+
         //gets the amount of times the interest will compound per year
         static void GetLoanCompoundAmount(out int compound)
         {
@@ -88,11 +89,12 @@ namespace Interest_Calculator
         }
 
         //calculates loans total paid after terms are completed
-        static double GetLoanTotal(double principal, double rate, int compound, double timeInYears)
+        static decimal GetLoanTotal(decimal principal, decimal rate, int compound, double timeInYears)
         {
-            return principal * Math.Pow((1 + (rate / compound)), (compound * timeInYears));
+            return principal * (decimal)Math.Pow((double)(1 + (rate / compound)), compound * timeInYears);
         }
 
+        //method to show total loan amount and interest paid to user in a readable format
         static void ShowAllLoanInformation(string loanTotal, string totalInterest)
         {
             Console.WriteLine($"\nYour total loan amount is ${loanTotal}");
